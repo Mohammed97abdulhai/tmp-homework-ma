@@ -1,0 +1,11 @@
+---
+name: nginx
+
+templates:
+    ctl.erb: bin/ctl
+    nginx.conf: conf/nginx.conf
+
+packages:
+- nginx
+
+properties: {}

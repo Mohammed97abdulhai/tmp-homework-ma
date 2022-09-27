@@ -1,0 +1,28 @@
+name: nginx-deployment
+
+releases: 
+- name: nginx-deployment
+  version: latest
+
+update:
+  canaries: 1
+  max_in_flight: 1
+  canary_watch_time: 5000-60000
+  update_watch_time: 5000-60000
+
+stemcells:
+- alias: default
+  os: ubuntu-xenial
+  version: latest
+
+instance_groups:
+- name: nginx-test
+  instances: 1
+  jobs:
+  - name: nginx
+    release: nginx-deployment
+  vm_type: default
+  networks:
+  - name: default
+  stemcell: default
+
