@@ -18,3 +18,8 @@ what have I done:
 docker-compose is only used for testing purposes.
 
 I uploaded the docker image for the go-app to docker hub, you can find it here: https://hub.docker.com/repository/docker/mow97/todo-go
+
+
+# what's lett? 
+
+exposing the app using ingress to the outside world.
