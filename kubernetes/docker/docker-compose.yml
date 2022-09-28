@@ -1,0 +1,39 @@
+version: '3'
+services:
+  app:
+    container_name: to-do-app
+    build: .
+    ports: 
+      - 8080:8080 
+    restart: on-failure
+    env_file: go-app/.env
+    volumes:
+      - api:/usr/src/app/
+    depends_on:
+      - database-postgres          
+    networks:
+      - todo
+
+
+  database-postgres:
+    image: postgres:latest
+    container_name: postgres-database
+    environment:
+      - POSTGRES_USER=postgres  
+      - POSTGRES_PASSWORD=123456789
+      - POSTGRES_DB=todo
+    ports:
+      - '5432:5432'
+    volumes:
+      - database_postgres:/var/lib/postgresql/data
+    networks:
+      - todo
+
+volumes:
+  api:
+  database_postgres:                  
+
+# Networks to be created to facilitate communication between containers
+networks:
+  todo:
+    driver: bridge

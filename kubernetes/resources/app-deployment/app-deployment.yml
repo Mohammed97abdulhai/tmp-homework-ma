@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: todo-go-deployment
+    labels:
+        app: todo-go-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: todo-go-deployment
+    template:
+        metadata:
+            labels:
+                app: todo-go-deployment
+        spec:
+            containers:
+            -   name: todo-go
+                image: mow97/todo-go:latest
+                envFrom:
+                    - configMapRef:
+                        name: postgres-secret   
+                ports:
+                -   name: http
+                    containerPort: 8080
