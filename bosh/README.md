@@ -1,23 +1,38 @@
-# anynines Homework
+# nginx-bosh-release
 
-This repository was created to help you to prepare for an interview or work sample.
+# prerequisites for running locally:
+    - Bosh Lite
+    - virtual box
 
-If you do not understand a step, please contact human resources.
+# testing the release: 
 
-## BOSH Introduction
+1- upload the release to BOSH Director (bosh lite): open terminal in bosh directory and tap the following: 
 
-Read the [introduction to BOSH](https://bosh.io/docs#intro).
+``` bosh upload-release ```
 
-## Setup BOSH Lite
+2- check if the release is up: 
 
-Go to [https://github.com/cloudfoundry/bosh-deployment](https://github.com/cloudfoundry/bosh-deployment) and install BOSH Lite on your local machine.
+```bosh releases```
 
-## Create nginx BOSH Release
+3- deploy the release to the director: 
 
-Read the section [Using BOSH to package and distribute software](https://bosh.io/docs/create-release/).
-Then create a BOSH release for nginx. It should display an empty page that is protected by basic authentication.
-Please fork this repository into your GitHub workspace and push your source code to the new repository.
+```bosh -d nginx-deployment deployment-manifest.yml```
 
-There should be a sample deployment file (e.g. *examples/nginx.yml*) that we can execute to test your BOSH release.
-Please provide a README.md (markdown) in the top directory on how to test your BOSH release with `curl`.
+4- to make sure the instance is up and running: 
+
+```bosh vms``` or ```bosh instances```
+
+5- (if you're using bosh lite) expose the private ip address inside bosh lite to be seen by the host machine: 
+
+```sudo route add -net 10.244.0.0/16     192.168.50.6```
+
+
+6- sending a request to the deployed nginx server: 
+
+```curl -i 10.244.0.2```
+
+
+## whats left to do: 
+
+add a web app that is protected by basic auth.
 
