@@ -1,35 +1,59 @@
 # nginx-bosh-release
-
-# prerequisites for running locally:
+this is a release for nginx using Bosh releasing platform, it allows you to run an nginx web server 
+## prerequisites for running locally:
     - Bosh Lite
     - virtual box
 
-# testing the release: 
+## testing the release: 
 
-1- upload the release to BOSH Director (bosh lite): open terminal in bosh directory and tap the following: 
-
-``` bosh upload-release ```
-
-2- check if the release is up: 
-
-```bosh releases```
-
-3- deploy the release to the director: 
-
-```bosh -d nginx-deployment deployment-manifest.yml```
-
-4- to make sure the instance is up and running: 
-
-```bosh vms``` or ```bosh instances```
-
-5- (if you're using bosh lite) expose the private ip address inside bosh lite to be seen by the host machine: 
-
-```sudo route add -net 10.244.0.0/16     192.168.50.6```
+- open the terminal in tmp-homework-ma/bosh directory
 
 
-6- sending a request to the deployed nginx server: 
+- upload cloud-config to the bosh director, this step is necessary for BOSH to find the network and other configuration :
 
-```curl -i 10.244.0.2```
+    ```console
+        user@TMP-HOMEWORK_MA/bosh:~$ bosh update-cloud-config cloud-config.yml
+    ```
+
+- upload the stemcell, a steam cell is a versioned OS image wrapped with IaaS specific packaging (I am using ubuntu-xenial). 
+
+    ```console
+     user@TMP-HOMEWORK_MA/bosh:~$ bosh upload-stemcell --sha1 9190e1d20dcb937e007abbb4054e19b1daa8d0a4 \
+  https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-xenial-go_agent?v=621.125 
+    ```
+     
+- upload the release to BOSH Director (bosh lite): open terminal in bosh directory and tap the following: 
+
+    ```console
+         user@TMP-HOMEWORK_MA/bosh:~$ bosh upload-release 
+    ```
+
+- check if the release is up: 
+
+    ```console
+        user@TMP-HOMEWORK_MA/bosh:~$ bosh releases
+    ```
+
+- deploy the release to the director: 
+
+    ```console 
+        user@TMP-HOMEWORK_MA/bosh:~$ bosh -d nginx-deployment deployment-manifest.yml
+    ```
+
+- to make sure the instance is up and running: 
+
+    ``` user@TMP-HOMEWORK_MA/bosh:~$ bosh vms``` or ```bosh instances```
+
+- (if you're using bosh lite) expose the private ip address inside bosh lite to be seen by the host machine: 
+
+    ```console
+        user@TMP-HOMEWORK_MA/bosh:~$ sudo route add -net 10.244.0.0/16     192.168.50.6
+    ```
+
+
+- sending a request to the deployed nginx server: 
+
+    ```curl -i 10.244.0.2```
 
 
 ## whats left to do: 
