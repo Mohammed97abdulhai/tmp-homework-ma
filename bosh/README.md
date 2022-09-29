@@ -1,6 +1,7 @@
 # nginx-bosh-release
 this is a release for nginx using Bosh releasing platform, it allows you to run an nginx web server 
 ## prerequisites for running locally:
+    - Bosh CLI
     - Bosh Lite
     - virtual box
 
