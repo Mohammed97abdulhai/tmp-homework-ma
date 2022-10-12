@@ -56,7 +56,7 @@ this is a release for nginx using Bosh releasing platform, it allows you to run 
     ```curl -i 10.244.0.2```
 
 
-## whats left to do: 
+## things to do in the future:
 
-add a web app that is protected by basic auth.
+add a web app to make use of the nginx and to learn and apply how to do a bosh release for multiple jobs
 

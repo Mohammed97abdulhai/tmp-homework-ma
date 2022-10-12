@@ -4,6 +4,7 @@ name: nginx
 templates:
     ctl.erb: bin/ctl
     nginx.conf: conf/nginx.conf
+    users_list.erb: conf/htpasswd
 
 packages:
 - nginx

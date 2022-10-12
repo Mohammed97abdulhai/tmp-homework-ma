@@ -1,6 +1,6 @@
-name: nginx-deployment
+name: nginx-deployment # the deployment name (used in deployment using bosh director)
 
-releases: 
+releases:         #the deployment will use the release named nginx-deployment (the latest version)
 - name: nginx-deployment
   version: latest
 
